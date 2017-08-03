@@ -19,10 +19,11 @@
 
     var CircularJSON = window.CircularJSON
 
+            
     var yao1 = new Yao.YaoApi();
 
       function test1() {
-        var _yao1$assetData$then$ = yao1.assetData(1).then(function (assetData) {
+        yao1.assetData(1).then(function (assetData) {
           // console.log(assetData);
           
           // console.log($("#json_result").html());
@@ -58,14 +59,12 @@
 
         }).catch(function (error) {
           console.log(error);
-        }),
-            categories = _yao1$assetData$then$.categories,
-            error = _yao1$assetData$then$.error;
+        })
       }
 
       test1();
 
-
+      
 </script>
 
 <body>
@@ -96,6 +95,15 @@ http://192.168.0.124:3002/api/v1/categories/1/items
 
 so we can operate all level of data (Asset, Category, SubCategory, PDF)
 just with even one object.
+
+a way to call Yao API
+
+        var yao1 = new Yao.YaoApi();
+        yao1.assetData(1).then(function (assetData) {
+          console.log(assetData);
+        }).catch(function (error) {
+          console.log(error);
+        })
 
 example:
 
