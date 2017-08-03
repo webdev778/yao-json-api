@@ -1,0 +1,26 @@
+<h1> Yao API Test Client </h1>
+
+<script src="../deploy/yaoapi.js"> </script>
+<script>
+    var yao1 = new Yao.YaoApi();
+
+      function test1() {
+        var _yao1$assetData$then$ = yao1.assetData(1).then(function (categories) {
+          console.log(categories);
+          console.log('------------------------*********************+++++++++++++++++++++++++++');
+          console.log(categories.categories[0].subcategories[0].items);
+        }).catch(function (error) {
+          console.log(error);
+        }),
+            categories = _yao1$assetData$then$.categories,
+            error = _yao1$assetData$then$.error;
+      }
+
+      test1();
+
+
+</script>
+
+
+<div id="json_result">
+</div>
