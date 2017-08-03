@@ -1,4 +1,4 @@
-import YaoApi from "./yaoapi_es6"
+import YaoApi from "../src/yaoapi_es6"
 
 const yao1 = new YaoApi()
 
