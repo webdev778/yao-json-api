@@ -1,6 +1,6 @@
 import JsonApi from "devour-client"
 
-const baseUrl = "http://192.168.0.124:3002/api/v1";
+const baseUrl = "http://54.186.1.104:3001/api/v1/";
 
 class YaoApi{
   constructor() {

@@ -10,7 +10,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var baseUrl = "http://192.168.0.124:3002/api/v1";
+var baseUrl = "http://54.186.1.104:3001/api/v1/";
 
 var YaoApi = function () {
   function YaoApi() {
