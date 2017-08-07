@@ -1,6 +1,6 @@
 import JsonApi from "devour-client"
 
-const baseUrl = "http://54.186.1.104:3001/api/v1/";
+const baseUrl = "http://192.168.0.124:3001/api/v1/";
 
 class YaoApi{
   constructor() {
@@ -32,7 +32,7 @@ class YaoApi{
 
     this.jsonApi.define('category', {
       name: '',
-      categoryType: '',
+      categorytype: '',
       sort: '',
       deleted: '',
       createdAt: '',
@@ -47,7 +47,11 @@ class YaoApi{
       },
       parent: {
         jsonApi: 'hasOne',
-        type: 'category'
+        type: 'categories'
+      },
+      asset: {
+        jsonApi: 'hasOne',
+        type: 'assets'
       }
     });
 
@@ -66,7 +70,7 @@ class YaoApi{
 
       category: {
         jsonApi: 'hasOne',
-        type: 'category'
+        type: 'categories'
       }
     });
   }
@@ -87,6 +91,66 @@ class YaoApi{
     return this.jsonApi.find('asset', asset_id, {
       include: 'categories,categories.parent,categories.subcategories,categories.items,categories.subcategories.items'
     })
+  }
+
+  // Create Category
+  createCategory(asset_id, cat_name){
+    let data = {
+      name: cat_name,
+      asset: {
+        id : asset_id,
+        type : "assets"
+      }
+    }
+
+    return this.jsonApi.create('category', data)
+  }
+  // Create Sub Category
+  createSubCategory(cat_id, cat_name){
+    let data = {
+      name: cat_name,
+      categorytype: 1,
+      parent: {
+        id : cat_id,
+        type : "categories"
+      }
+    }
+
+    return this.jsonApi.create('category', data)
+  }
+
+  // Create PDF 
+  createItem(cat_id, pdf_title){
+    let data = {
+      title: pdf_title,
+      category: {
+        id : cat_id,
+        type : "categories"
+      }
+    }
+
+    return this.jsonApi.create('item', data)
+  }
+
+
+  // Update Category/SubCategory
+  udpateCategory(category){
+    return this.jsonApi.update('category',category)
+  }
+
+  // Update PDF 
+  updateItem(item){
+    return this.jsonApi.update('item', item)
+  }
+
+  // Delete Category
+  deleteCategory(id){
+    return this.jsonApi.destroy('category',id)
+  }
+
+  // Delete PDF
+  deleteItem(id){
+    return this.jsonApi.destroy('item', id)
   }
 
 }

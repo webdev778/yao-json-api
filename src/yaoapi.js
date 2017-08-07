@@ -10,7 +10,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var baseUrl = "http://54.186.1.104:3001/api/v1/";
+var baseUrl = "http://192.168.0.124:3001/api/v1/";
 
 var YaoApi = function () {
   function YaoApi() {
@@ -43,7 +43,7 @@ var YaoApi = function () {
 
     this.jsonApi.define('category', {
       name: '',
-      categoryType: '',
+      categorytype: '',
       sort: '',
       deleted: '',
       createdAt: '',
@@ -58,7 +58,11 @@ var YaoApi = function () {
       },
       parent: {
         jsonApi: 'hasOne',
-        type: 'category'
+        type: 'categories'
+      },
+      asset: {
+        jsonApi: 'hasOne',
+        type: 'assets'
       }
     });
 
@@ -77,7 +81,7 @@ var YaoApi = function () {
 
       category: {
         jsonApi: 'hasOne',
-        type: 'category'
+        type: 'categories'
       }
     });
   }
@@ -107,6 +111,86 @@ var YaoApi = function () {
       return this.jsonApi.find('asset', asset_id, {
         include: 'categories,categories.parent,categories.subcategories,categories.items,categories.subcategories.items'
       });
+    }
+
+    // Create Category
+
+  }, {
+    key: "createCategory",
+    value: function createCategory(asset_id, cat_name) {
+      var data = {
+        name: cat_name,
+        asset: {
+          id: asset_id,
+          type: "assets"
+        }
+      };
+
+      return this.jsonApi.create('category', data);
+    }
+    // Create Sub Category
+
+  }, {
+    key: "createSubCategory",
+    value: function createSubCategory(cat_id, cat_name) {
+      var data = {
+        name: cat_name,
+        categorytype: 1,
+        parent: {
+          id: cat_id,
+          type: "categories"
+        }
+      };
+
+      return this.jsonApi.create('category', data);
+    }
+
+    // Create PDF 
+
+  }, {
+    key: "createItem",
+    value: function createItem(cat_id, pdf_title) {
+      var data = {
+        title: pdf_title,
+        category: {
+          id: cat_id,
+          type: "categories"
+        }
+      };
+
+      return this.jsonApi.create('item', data);
+    }
+
+    // Update Category/SubCategory
+
+  }, {
+    key: "udpateCategory",
+    value: function udpateCategory(category) {
+      return this.jsonApi.update('category', category);
+    }
+
+    // Update PDF 
+
+  }, {
+    key: "updateItem",
+    value: function updateItem(item) {
+      return this.jsonApi.update('item', item);
+    }
+
+    // Delete Category
+
+  }, {
+    key: "deleteCategory",
+    value: function deleteCategory(id) {
+      return this.jsonApi.destroy('category', id);
+    }
+
+    // Delete PDF
+
+  }, {
+    key: "deleteItem",
+    value: function deleteItem(id) {
+      return this.jsonApi.destroy('item', id);
     }
   }]);
 
