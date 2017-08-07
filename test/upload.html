@@ -1,0 +1,57 @@
+<html>
+
+<head>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+</head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+  crossorigin="anonymous"></script>
+
+<body>
+  <div class="container">
+    <div class="row" style="margin-top:50px; height:100px">
+      <div class="col-lg-offset-3">
+        <h1> PDF Upload Test </h1>
+      </div>
+    </div>
+    <div class="jumbotron">
+      <div class="row">
+        <div class="col-md-6 col-xs-6 col col-md-offset-3">
+          <div class="row">
+            <form class="new_papermache_paper" id="new_papermache_paper" enctype="multipart/form-data" action="http://192.168.0.124:3001/api/v1/items" accept-charset="UTF-8"
+              method="post">
+              <!-- <input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="ZlJj8RgJwUFt1A9WgFCHkuGPXycFiUTp+2agCXlbzUj/iIMOWzgMTF5mujg+MEDhYtA8Y48b4f+Q6KeF1FISEg=="> -->
+              <div id="error_explanation">
+                <ul>
+                </ul>
+                <div class="hidden">
+                  <label for="papermache_paper_account_id">Account</label>
+                  <input value="4" type="text" name="item[category_id]" id="item_id">
+                </div>
+                <div class="form-group">
+                  <input type="file" name="item[file]" id="item_file">
+                </div>
+                <div class="form-group">
+                  <div class="input-group">
+                    <input class="form-control" placeholder="Title" type="text" name="item[title]" id="item_title">
+                    <div class="input-group-btn">
+                      <input type="submit" name="commit" value="Upload" class="btn btn-primary">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="row about">
+            <p>
+              Upload your paper in PDF format. Not in PDF format? Don't worry, we'll convert it for you!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+this.jsonApi.define('item', {
+      title: '',
+      content: '',
+      file: '',
+      sort: '',
+      deleted: '',
+      createdAt: '',
+      updatedAt: '',
+
+      category: {
+        jsonApi: 'hasOne',
+        type: 'category'
+      }
+    });
+
+
+
+        let data = {
+      name: cat_name,
+      asset: {
+        id : asset_id,
+        type : "assets"
+      }
+    }
+
+
+        let data = {
+      name: cat_name,
+      categorytype: 1,
+      parent: {
+        id : cat_id,
+        type : "categories"
+      }
+    }
