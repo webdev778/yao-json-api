@@ -46,6 +46,7 @@ var YaoApi = function () {
       categorytype: '',
       sort: '',
       deleted: '',
+      assigned: '',
       createdAt: '',
       updatedAt: '',
       items: {
@@ -76,6 +77,7 @@ var YaoApi = function () {
       file: '',
       sort: '',
       deleted: '',
+      assigned: '',
       createdAt: '',
       updatedAt: '',
 
@@ -103,13 +105,44 @@ var YaoApi = function () {
       });
     }
 
-    // Category
+    // Get Category
 
   }, {
     key: "assetData",
     value: function assetData(asset_id) {
       return this.jsonApi.find('asset', asset_id, {
         include: 'categories,categories.parent,categories.subcategories,categories.items,categories.subcategories.items'
+      });
+    }
+
+    // Get Unassigned Sub Category
+
+  }, {
+    key: "getUnassignedSubCategories",
+    value: function getUnassignedSubCategories(asset_id) {
+      return this.jsonApi.findAll('category', {
+        include: 'parent,items',
+        filter: {
+          assigned: false,
+          categorytype: 1,
+          deleted: false
+          //,asset: asset_id
+        }
+      });
+    }
+
+    // Get Unassigned Sub Category
+
+  }, {
+    key: "getUnassignedItems",
+    value: function getUnassignedItems(asset_id) {
+      return this.jsonApi.findAll('item', {
+        include: 'category',
+        filter: {
+          assigned: false,
+          deleted: false
+          //,asset: asset_id
+        }
       });
     }
 

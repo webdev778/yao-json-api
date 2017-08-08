@@ -33,14 +33,14 @@ async function test1(){
     // console.log(result2)
 
     
-    console.log("4 : Update Category Test - 1")
-    // change category name
-    let newCat = {
-      id: 13,
-      name: 'New Cat'
-    }
-    let result3 = await yao1.udpateCategory(newCat)
-    console.log(result3)
+    // console.log("4 : Update Category Test - 1")
+    // // change category name
+    // let newCat = {
+    //   id: 13,
+    //   name: 'New Cat'
+    // }
+    // let result3 = await yao1.udpateCategory(newCat)
+    // console.log(result3)
     
 
     // change parent_id for subcategory drag and drop
@@ -84,18 +84,25 @@ async function test1(){
     */
 
     // drag and drop pdf
-    console.log("Update Item - Drag and Drop Test")
-    let dragItem = {
-      id: 80,
-      //title: newTitle
-      category: {
-        id: 14, //category_id
-        type: 'categories'
-      }      
-    }
-    let result9 = await yao1.updateItem(dragItem)
-    console.log(result9)
+    // console.log("Update Item - Drag and Drop Test")
+    // let dragItem = {
+    //   id: 80,
+    //   //title: newTitle
+    //   category: {
+    //     id: 14, //category_id
+    //     type: 'categories'
+    //   }      
+    // }
+    // let result9 = await yao1.updateItem(dragItem)
+    // console.log(result9)
 
+    console.log("10 : getUnassignedSubCategories Test")
+    let unassignedSubCategories = await yao1.getUnassignedSubCategories(1)
+    console.log(unassignedSubCategories)
+
+    console.log("11 : getUnassignedItems Test")
+    let unassignedItems = await yao1.getUnassignedItems(1)
+    console.log(unassignedItems)
   }catch(err){
     console.log(err)
   }

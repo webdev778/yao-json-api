@@ -1,5 +1,7 @@
 src="./src"
 deploy="./deploy"
+admin_asset="../vertex_admin_asset/app/scripts/"
+viwer_asset="../vertex_asset_viewer/app/scripts/"
 tmp="./tmp"
 tempfile="yaoapi.tmp.js"
 
@@ -23,4 +25,9 @@ $(npm bin)/minify --output $deploy/yaoapi.js $tmp/$tempfile
 echo "Removing temp folder and files..."
 rm -rf $tmp
 
+echo "deploy to Asset Viwer and Admin Asset"
+echo "deploy to Admin Asset"
+cp ./deploy/yaoapi.js $admin_asset
+echo "deploy to Asset Viwer"
+cp ./deploy/yaoapi.js $viwer_asset
 echo "finished."

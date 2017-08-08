@@ -35,6 +35,7 @@ class YaoApi{
       categorytype: '',
       sort: '',
       deleted: '',
+      assigned: '',
       createdAt: '',
       updatedAt: '',
       items: {
@@ -65,6 +66,7 @@ class YaoApi{
       file: '',
       sort: '',
       deleted: '',
+      assigned: '',
       createdAt: '',
       updatedAt: '',
 
@@ -86,10 +88,35 @@ class YaoApi{
     })
   }
 
-  // Category
+  // Get Category
   assetData(asset_id){
     return this.jsonApi.find('asset', asset_id, {
       include: 'categories,categories.parent,categories.subcategories,categories.items,categories.subcategories.items'
+    })
+  }
+
+  // Get Unassigned Sub Category
+  getUnassignedSubCategories(asset_id){
+    return this.jsonApi.findAll('category', {
+      include: 'parent,items',
+      filter: { 
+        assigned: false, 
+        categorytype: 1, 
+        deleted: false
+        //,asset: asset_id
+      }
+    })
+  }
+
+  // Get Unassigned Sub Category
+  getUnassignedItems(asset_id) {
+    return this.jsonApi.findAll('item', {
+      include: 'category',
+      filter: { 
+        assigned: false, 
+        deleted: false
+        //,asset: asset_id
+      }
     })
   }
 
