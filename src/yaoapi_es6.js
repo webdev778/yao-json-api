@@ -134,7 +134,7 @@ class YaoApi{
 
 
   // Update Category/SubCategory
-  udpateCategory(category){
+  updateCategory(category){
     return this.jsonApi.update('category',category)
   }
 

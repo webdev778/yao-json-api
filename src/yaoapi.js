@@ -164,8 +164,8 @@ var YaoApi = function () {
     // Update Category/SubCategory
 
   }, {
-    key: "udpateCategory",
-    value: function udpateCategory(category) {
+    key: "updateCategory",
+    value: function updateCategory(category) {
       return this.jsonApi.update('category', category);
     }
 
