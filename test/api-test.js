@@ -14,22 +14,23 @@ async function test1(){
   */
   try{
 
-    // console.log("1 : assetData Test")
-    // let assetData = await yao1.assetData(1)
-    // console.log(assetData)
+    console.log("1 : assetData Test")
+    let assetData = await yao1.assetData(1)
+    console.log(assetData)
 
-    /*
+  
     console.log("2 : Create Category Test")
     let result = await yao1.createCategory(1, "Hahahaha")
     console.log(result)
 
+
     console.log("3 : Create Sub Category Test")
-    let result1 = await yao1.createSubCategory(46, "Sub Hahahaha")
+    let result1 = await yao1.createSubCategory(1, 10, "API Test88")
     console.log(result1)
-    */
+  
 
     // console.log("3 : Create PDF file Test")
-    // let result2 = await yao1.createItem(46, "Sub Hahahaha")
+    // let result2 = await yao1.createItem(1, 10, "API Test88")
     // console.log(result2)
 
     
@@ -73,36 +74,36 @@ async function test1(){
     }
     let result7 = await yao1.udpateCategory(delCat)
     console.log(result7)
-
-    // delete pdf
-    let delItem = {
-      id: 13,
-      deleted: true
-    }
-    let result8 = await yao1.udpateItem(delItem)
-    console.log(result8)
     */
-
-    // drag and drop pdf
-    // console.log("Update Item - Drag and Drop Test")
-    // let dragItem = {
-    //   id: 80,
-    //   //title: newTitle
-    //   category: {
-    //     id: 14, //category_id
-    //     type: 'categories'
-    //   }      
+    // delete pdf
+    // let delItem = {
+    //   id: 60,
+    //   deleted: true
     // }
-    // let result9 = await yao1.updateItem(dragItem)
-    // console.log(result9)
+    // let result8 = await yao1.updateItem(delItem)
+    // console.log(result8)
 
-    console.log("10 : getUnassignedSubCategories Test")
-    let unassignedSubCategories = await yao1.getUnassignedSubCategories(1)
-    console.log(unassignedSubCategories)
 
-    console.log("11 : getUnassignedItems Test")
-    let unassignedItems = await yao1.getUnassignedItems(1)
-    console.log(unassignedItems)
+    //drag and drop pdf
+    console.log("Update Item - Drag and Drop Test")
+    let dragItem = {
+      id: 81,
+      //title: newTitle
+      category: {
+        id: 36, //category_id
+        type: 'categories'
+      }      
+    }
+    let result9 = await yao1.updateItem(dragItem)
+    console.log(result9)
+
+    // console.log("10 : getUnassignedSubCategories Test")
+    // let unassignedSubCategories = await yao1.getUnassignedSubCategories(1)
+    // console.log(unassignedSubCategories)
+
+    // console.log("11 : getUnassignedItems Test")
+    // let unassignedItems = await yao1.getUnassignedItems(1)
+    // console.log(unassignedItems)
   }catch(err){
     console.log(err)
   }

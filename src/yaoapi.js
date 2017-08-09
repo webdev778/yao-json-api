@@ -10,7 +10,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var baseUrl = "http://192.168.0.124:3001/api/v1/";
+var baseUrl = "http://192.168.0.124:3001/api/v1";
 
 var YaoApi = function () {
   function YaoApi() {
@@ -80,7 +80,8 @@ var YaoApi = function () {
       assigned: '',
       createdAt: '',
       updatedAt: '',
-
+      filesize: '',
+      assetId: '',
       category: {
         jsonApi: 'hasOne',
         type: 'categories'
@@ -111,7 +112,7 @@ var YaoApi = function () {
     key: "assetData",
     value: function assetData(asset_id) {
       return this.jsonApi.find('asset', asset_id, {
-        include: 'categories,categories.parent,categories.subcategories,categories.items,categories.subcategories.items'
+        include: 'categories,categories.subcategories,categories.items,categories.subcategories.items'
       });
     }
 
@@ -121,12 +122,12 @@ var YaoApi = function () {
     key: "getUnassignedSubCategories",
     value: function getUnassignedSubCategories(asset_id) {
       return this.jsonApi.findAll('category', {
-        include: 'parent,items',
+        include: 'items',
         filter: {
           assigned: false,
           categorytype: 1,
-          deleted: false
-          //,asset: asset_id
+          deleted: false,
+          asset: asset_id
         }
       });
     }
@@ -135,13 +136,13 @@ var YaoApi = function () {
 
   }, {
     key: "getUnassignedItems",
-    value: function getUnassignedItems(asset_id) {
+    value: function getUnassignedItems(id) {
       return this.jsonApi.findAll('item', {
         include: 'category',
         filter: {
           assigned: false,
-          deleted: false
-          //,asset: asset_id
+          deleted: false,
+          asset_id: id
         }
       });
     }
@@ -165,13 +166,17 @@ var YaoApi = function () {
 
   }, {
     key: "createSubCategory",
-    value: function createSubCategory(cat_id, cat_name) {
+    value: function createSubCategory(asset_id, cat_id, cat_name) {
       var data = {
         name: cat_name,
         categorytype: 1,
         parent: {
           id: cat_id,
           type: "categories"
+        },
+        asset: {
+          id: asset_id,
+          type: "assets"
         }
       };
 
@@ -182,9 +187,10 @@ var YaoApi = function () {
 
   }, {
     key: "createItem",
-    value: function createItem(cat_id, pdf_title) {
+    value: function createItem(asset_id, cat_id, pdf_title) {
       var data = {
         title: pdf_title,
+        assetId: asset_id,
         category: {
           id: cat_id,
           type: "categories"

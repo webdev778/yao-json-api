@@ -1,6 +1,6 @@
 import JsonApi from "devour-client"
 
-const baseUrl = "http://192.168.0.124:3001/api/v1/";
+const baseUrl = "http://192.168.0.124:3001/api/v1";
 
 class YaoApi{
   constructor() {
@@ -69,7 +69,8 @@ class YaoApi{
       assigned: '',
       createdAt: '',
       updatedAt: '',
-
+      filesize: '',
+      assetid: '',
       category: {
         jsonApi: 'hasOne',
         type: 'categories'
@@ -91,31 +92,31 @@ class YaoApi{
   // Get Category
   assetData(asset_id){
     return this.jsonApi.find('asset', asset_id, {
-      include: 'categories,categories.parent,categories.subcategories,categories.items,categories.subcategories.items'
+      include: 'categories,categories.subcategories,categories.items,categories.subcategories.items'
     })
   }
 
   // Get Unassigned Sub Category
   getUnassignedSubCategories(asset_id){
     return this.jsonApi.findAll('category', {
-      include: 'parent,items',
+      include: 'items',
       filter: { 
         assigned: false, 
         categorytype: 1, 
         deleted: false
-        //,asset: asset_id
+        ,asset: asset_id
       }
     })
   }
 
   // Get Unassigned Sub Category
-  getUnassignedItems(asset_id) {
+  getUnassignedItems(id) {
     return this.jsonApi.findAll('item', {
       include: 'category',
       filter: { 
         assigned: false, 
-        deleted: false
-        //,asset: asset_id
+        deleted: false,
+        asset_id: id
       }
     })
   }
@@ -133,13 +134,17 @@ class YaoApi{
     return this.jsonApi.create('category', data)
   }
   // Create Sub Category
-  createSubCategory(cat_id, cat_name){
+  createSubCategory(asset_id, cat_id, cat_name){
     let data = {
       name: cat_name,
       categorytype: 1,
       parent: {
         id : cat_id,
         type : "categories"
+      },
+      asset:{
+        id : asset_id,
+        type : "assets"
       }
     }
 
@@ -147,9 +152,10 @@ class YaoApi{
   }
 
   // Create PDF 
-  createItem(cat_id, pdf_title){
+  createItem(asset_id, cat_id, pdf_title){
     let data = {
       title: pdf_title,
+      assetid: asset_id,
       category: {
         id : cat_id,
         type : "categories"

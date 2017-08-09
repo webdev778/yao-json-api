@@ -21,6 +21,7 @@ browserify $src/export.js -o $tmp/$tempfile
 
 echo "minifying..."
 $(npm bin)/minify --output $deploy/yaoapi.js $tmp/$tempfile
+# cp $tmp/$tempfile $deploy/yaoapi.js
 
 echo "Removing temp folder and files..."
 rm -rf $tmp
