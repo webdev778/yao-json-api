@@ -49,6 +49,7 @@ var YaoApi = function () {
       assigned: '',
       createdAt: '',
       updatedAt: '',
+      assetid1: '',
       items: {
         jsonApi: 'hasMany',
         type: 'items'
@@ -81,7 +82,7 @@ var YaoApi = function () {
       createdAt: '',
       updatedAt: '',
       filesize: '',
-      assetId: '',
+      assetid: '',
       category: {
         jsonApi: 'hasOne',
         type: 'categories'
@@ -127,22 +128,22 @@ var YaoApi = function () {
           assigned: false,
           categorytype: 1,
           deleted: false,
-          asset: asset_id
+          assetid1: asset_id
         }
       });
     }
 
-    // Get Unassigned Sub Category
+    // Get Unassigned Items
 
   }, {
     key: "getUnassignedItems",
-    value: function getUnassignedItems(id) {
+    value: function getUnassignedItems(asset_id) {
       return this.jsonApi.findAll('item', {
         include: 'category',
         filter: {
           assigned: false,
           deleted: false,
-          asset_id: id
+          assetid: asset_id
         }
       });
     }
@@ -170,13 +171,10 @@ var YaoApi = function () {
       var data = {
         name: cat_name,
         categorytype: 1,
+        assetid1: asset_id,
         parent: {
           id: cat_id,
           type: "categories"
-        },
-        asset: {
-          id: asset_id,
-          type: "assets"
         }
       };
 
@@ -190,7 +188,7 @@ var YaoApi = function () {
     value: function createItem(asset_id, cat_id, pdf_title) {
       var data = {
         title: pdf_title,
-        assetId: asset_id,
+        assetid: asset_id,
         category: {
           id: cat_id,
           type: "categories"

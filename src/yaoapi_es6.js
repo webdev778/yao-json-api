@@ -38,6 +38,7 @@ class YaoApi{
       assigned: '',
       createdAt: '',
       updatedAt: '',
+      assetid1: '',
       items: {
         jsonApi: 'hasMany',
         type: 'items'
@@ -104,19 +105,19 @@ class YaoApi{
         assigned: false, 
         categorytype: 1, 
         deleted: false
-        ,asset: asset_id
+        ,assetid1: asset_id
       }
     })
   }
 
-  // Get Unassigned Sub Category
-  getUnassignedItems(id) {
+  // Get Unassigned Items
+  getUnassignedItems(asset_id) {
     return this.jsonApi.findAll('item', {
       include: 'category',
       filter: { 
         assigned: false, 
         deleted: false,
-        asset_id: id
+        assetid: asset_id
       }
     })
   }
@@ -138,13 +139,10 @@ class YaoApi{
     let data = {
       name: cat_name,
       categorytype: 1,
+      assetid1:asset_id,
       parent: {
         id : cat_id,
         type : "categories"
-      },
-      asset:{
-        id : asset_id,
-        type : "assets"
       }
     }
 
