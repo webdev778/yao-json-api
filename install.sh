@@ -15,12 +15,30 @@ chmod 777 $tmp
 
 echo "converting ES6 to ES5..."
 $(npm bin)/babel $src/yaoapi_es6.js --out-file $src/yaoapi.js
+if [ $? -eq 0 ]; then
+    echo "succesfully converted ES6 to ES5."
+else
+    echo "converting ES6 to ES5 failed."
+    exit 1
+fi
 
 echo "browserify..."
 browserify $src/export.js -o $tmp/$tempfile
+if [ $? -eq 0 ]; then
+    echo "succesfully browserify."
+else
+    echo "browserify failed."
+    exit 1
+fi
 
 echo "minifying..."
 $(npm bin)/minify --output $deploy/yaoapi.js $tmp/$tempfile
+if [ $? -eq 0 ]; then
+    echo "succesfully minified."
+else
+    echo "minifying failed."
+    exit 1
+fi
 # cp $tmp/$tempfile $deploy/yaoapi.js
 
 echo "Removing temp folder and files..."
