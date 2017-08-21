@@ -114,7 +114,7 @@ async function test1(){
     }
 
     //subcategory drag and drop
-    if(true){
+    if(false){
       console.log("Update Item - Drag and Drop Test")
       let dragItem = {
         id: 14,
@@ -139,7 +139,59 @@ async function test1(){
       let unassignedItems = await yao1.getUnassignedItems(1)
       console.log(unassignedItems)
     }
+
+    // login test
+    let auth_token
+    if(false){
+      console.log("11 : Login Test")
+      auth_token = await yao1.login("yukisnowman@yandex.com", "12345678")
+      console.log(auth_token)
+    }
+
+    if(false){
+      console.log("12 : Logout Test")
+      if (auth_token){
+        let result = await yao1.logout(auth_token)
+        console.log(result)
+        if(!result)
+          console.log("logout fail!")
+        else
+          console.log("logout success")
+      }
+    }
+
+    if(false){
+      console.log("13 : API Authenticate Test")
+      yao1.authenticate(auth_token)
+    }
+
+    if (false) { // passed : 
+      console.log("14 : assetData with Auth Test")
+      let assetData = await yao1.assetData(1)
+      console.log('++++++++++++++++++++++++++++++++++++++++++++++++++++')
+      console.log(assetData)
+
+      var cats = []
+      cats = assetData.categories
+      for (let i = 0; i < cats.length; i ++){
+        console.log(`Category Name : ${cats[i].name}`)
+        console.log("---------------------------------------------")
+        for (let j = 0; j < cats[i].subcategories.length; j ++){
+          console.log(cats[i].subcategories[j])
+        }
+      }
+    }
+
+    if(true) {
+      console.log("15 : search pdf files with contentst")
+      let keyword = "vertex%20medicine"
+      let foundItems = await yao1.searchPDF(1, keyword)
+      console.log('++++++++++++++++++++++++++++++++++++++++++++++++++++')
+      console.log(foundItems)
+    }
+
   }catch(err){
+    console.log("hello")
     console.log(err)
   }
 }

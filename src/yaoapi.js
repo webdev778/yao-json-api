@@ -10,14 +10,24 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var baseUrl = "http://192.168.0.124:3001/api/v1";
+// import Request from "es6-request"
+
+// const request = require("es6-request");
+
+/* for Production */
+var baseUrl = "http://54.186.1.104:3001/api/v1";
+var authUrl = "http://54.186.1.104:3001/users";
+
+/* for Development */
+// const  baseUrl = "http://192.168.0.109:3001/api/v1"
+// const  authUrl = "http://192.168.0.109:3001/users"
+
 
 var YaoApi = function () {
   function YaoApi() {
     _classCallCheck(this, YaoApi);
 
     this.jsonApi = new _devourClient2.default({ apiUrl: baseUrl, logger: false });
-
     this.jsonApi.replaceMiddleware('errors', {
       name: 'yao-error-handler',
       error: function error(payload) {
@@ -228,6 +238,83 @@ var YaoApi = function () {
     key: "deleteItem",
     value: function deleteItem(id) {
       return this.jsonApi.destroy('item', id);
+    }
+  }, {
+    key: "authenticate",
+    value: function authenticate(token) {
+      this.jsonApi.headers['Authorization'] = "" + token;
+    }
+  }, {
+    key: "unauthenticate",
+    value: function unauthenticate() {
+      delete this.jsonApi.headers['Authorization'];
+    }
+
+    // Login 
+    // login(email, password){
+    //   let userinfo = {
+    //     user:{
+    //       email : email,
+    //       password : password
+    //     }
+    //   }
+
+    //   /** using axios */
+    //   // this.jsonApi.axios.post(authUrl+"/login", userinfo).then((resp) => {
+    //   //   console.log(resp.status)
+    //   //   console.log(resp.data)
+    //   // })
+
+    //   /** es6-request */
+    //   return new Promise((resolve, reject) => {
+    //     request.post(authUrl+"/login")
+    //       .sendJSON({
+    //         user: {
+    //           email: email,
+    //           password: password
+    //         }
+    //       }).then(([body, res]) => {
+    //         // if(res != 200)
+    //         //   reject(JSON.parse(body).error.message)
+    //         // else
+    //         // console.log(JSON.parse(body).auth_token) 
+    //         resolve(JSON.parse(body).auth_token)
+    //       })
+    //   })
+    // }
+
+    // // Logout
+    // logout(token){
+    //   return new Promise((resolve, reject) => {
+    //     request.delete(authUrl+"/logout")
+    //     .header("Authorization", token)
+    //     .then(([body, res]) => {
+    //       // console.log(res)
+    //       // console.log(body)
+    //       console.log(res.statusCode)
+    //       if(res.statusCode > 400)
+    //         resolve(false)
+    //       else
+    //         resolve(true)
+    //     })
+    //   })
+    // }
+
+    // Search pdf files with their contents
+
+  }, {
+    key: "searchPDF",
+    value: function searchPDF(asset_id, keyword) {
+      return this.jsonApi.findAll('item', {
+        include: 'category',
+        filter: {
+          assigned: true,
+          deleted: false,
+          assetid: asset_id,
+          content: keyword
+        },
+        fields: { items: ['id'] }
+      });
     }
   }]);
 
