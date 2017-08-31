@@ -4,8 +4,8 @@ import JsonApi from "devour-client"
 // const request = require("es6-request");
 
 /* for Production */
-const  baseUrl = "http://54.186.1.104:3001/api/v1"
-const  authUrl = "http://54.186.1.104:3001/users"
+const  baseUrl = "http://54.202.144.125:3001/api/v1"
+const  authUrl = "http://54.202.144.125:3001/users"
 
 /* for Development */
 // const  baseUrl = "http://192.168.0.109:3001/api/v1"
@@ -19,11 +19,11 @@ class YaoApi{
         name: 'yao-error-handler',
         error: function (payload) {
           console.log(payload)
-          // let ret
-          // if (payload.data.errors)
-          //   ret = payload.data.errors
-          // return ret
-          return { errors: [] }
+          let ret
+          if (payload.data.errors)
+            ret = payload.data.errors
+          return ret
+          // return { errors: [] }
         }
       }
     ) 

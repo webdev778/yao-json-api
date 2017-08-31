@@ -4,14 +4,16 @@ const yao1 = new YaoApi()
 
 async function test1(){
 
-  /*
+  
   const { categories, error } = yao1.assetData(1).then(categories => {
     console.log(categories)
     console.log('------------------------*********************+++++++++++++++++++++++++++')
     console.log(categories.categories[0].subcategories[0].items);
   })
-  .catch(error => {console.log(error)})
-  */
+  .catch(error => {
+    console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+    console.log(error)})
+  
   try{
 
     if (false) { // passed : OK, 8.10
@@ -182,7 +184,7 @@ async function test1(){
       }
     }
 
-    if(true) {
+    if(false) {
       console.log("15 : search pdf files with contentst")
       let keyword = "vertex%20medicine"
       let foundItems = await yao1.searchPDF(1, keyword)
