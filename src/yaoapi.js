@@ -15,8 +15,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 // const request = require("es6-request");
 
 /* for Production */
-var baseUrl = "http://54.202.144.125:3001/api/v1";
-var authUrl = "http://54.202.144.125:3001/users";
+var baseUrl = "http://localhost:3000/api/v1";
+var authUrl = "http://localhost:3000/users";
 
 /* for Development */
 // const  baseUrl = "http://192.168.0.109:3001/api/v1"
@@ -92,6 +92,7 @@ var YaoApi = function () {
       updatedAt: '',
       filesize: '',
       assetid: '',
+      tags: '',
       category: {
         jsonApi: 'hasOne',
         type: 'categories'
